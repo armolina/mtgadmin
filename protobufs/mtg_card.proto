@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+message EmptyMesssage {}
+
+message PingResponse {
+    string result = 1;
+}
+
+message CardInfo {
+    string name = 1;
+    string mana_cost = 2;
+}
+
+service CardService {
+    rpc Ping(EmptyMesssage) returns (PingResponse);
+    rpc GetCardInfo(EmptyMesssage) returns (CardInfo);
+}
