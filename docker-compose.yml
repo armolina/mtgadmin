@@ -10,7 +10,12 @@ services:
             - MONGO_HOST=mongodb
         ports:
             - "50001:50051"
-
+    srv_mtga_be_fa:
+        build:
+            context: .
+            dockerfile: ./srv_mtga_be_fa/Dockerfile
+        ports:
+            - "8000:8000"
     srv_mtga_fe:
         build:
             context: .
@@ -20,5 +25,15 @@ services:
             - MTGA_BE_PORT=50051
         depends_on:
             - srv_mtga_be
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=pass
+        volumes:
+            - mongo:/data/db
+        ports:
+            - "27017:27017"
 volumes:
     mongo:

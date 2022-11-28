@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0emtg_card.proto\"\x0f\n\rEmptyMesssage\"\x1e\n\x0cPingResponse\x12\x0e\n\x06result\x18\x01 \x01(\t24\n\x0b\x43\x61rdService\x12%\n\x04Ping\x12\x0e.EmptyMesssage\x1a\r.PingResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0emtg_card.proto\"\x0f\n\rEmptyMesssage\"\x1e\n\x0cPingResponse\x12\x0e\n\x06result\x18\x01 \x01(\t\"\x17\n\tMTGCardID\x12\n\n\x02id\x18\x01 \x01(\t\"B\n\x10MongoConstraints\x12\x0c\n\x04skip\x18\x01 \x01(\x05\x12\r\n\x05limit\x18\x02 \x01(\x05\x12\x11\n\tmax_items\x18\x03 \x01(\x05\"6\n\x07MTGCard\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x11\n\tmana_cost\x18\x03 \x01(\t2\xf5\x01\n\x0b\x43\x61rdService\x12\'\n\x04Ping\x12\x0e.EmptyMesssage\x1a\r.PingResponse\"\x00\x12(\n\nGetMTGCard\x12\x0e.EmptyMesssage\x1a\x08.MTGCard\"\x00\x12\x31\n\x10GetNumberMTGCard\x12\x11.MongoConstraints\x1a\x08.MTGCard\"\x00\x12\x39\n\x16StreamGetNumberMTGCard\x12\x11.MongoConstraints\x1a\x08.MTGCard\"\x00\x30\x01\x12%\n\x0b\x46indMTGCard\x12\n.MTGCardID\x1a\x08.MTGCard\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'mtg_card_pb2', globals())
@@ -24,6 +24,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _EMPTYMESSSAGE._serialized_end=33
   _PINGRESPONSE._serialized_start=35
   _PINGRESPONSE._serialized_end=65
-  _CARDSERVICE._serialized_start=67
-  _CARDSERVICE._serialized_end=119
+  _MTGCARDID._serialized_start=67
+  _MTGCARDID._serialized_end=90
+  _MONGOCONSTRAINTS._serialized_start=92
+  _MONGOCONSTRAINTS._serialized_end=158
+  _MTGCARD._serialized_start=160
+  _MTGCARD._serialized_end=214
+  _CARDSERVICE._serialized_start=217
+  _CARDSERVICE._serialized_end=462
 # @@protoc_insertion_point(module_scope)

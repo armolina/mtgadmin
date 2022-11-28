@@ -6,6 +6,26 @@ message PingResponse {
     string result = 1;
 }
 
+message MTGCardID {
+    string id = 1;
+}
+
+message MongoConstraints {
+    int32 skip = 1;
+    int32 limit = 2;
+    int32 max_items = 3;
+}
+
+message MTGCard {
+    string id = 1;
+    string name = 2;
+    string mana_cost = 3;
+}
+
 service CardService {
-    rpc Ping(EmptyMesssage) returns (PingResponse);
+    rpc Ping(EmptyMesssage) returns (PingResponse) {};
+    rpc GetMTGCard(EmptyMesssage) returns (MTGCard) {};
+    rpc GetNumberMTGCard(MongoConstraints) returns (MTGCard) {};
+    rpc StreamGetNumberMTGCard(MongoConstraints) returns (stream MTGCard) {};
+    rpc FindMTGCard(MTGCardID) returns (MTGCard) {};
 }
