@@ -2,23 +2,17 @@ version: '3.3'
 services:    
     srv_mtga_be:
         build:
-            context: .
-            dockerfile: ./srv_mtga_be/Dockerfile
+            context: ./srv_mtga_be
         environment:
-            - MONGO_USER=root
-            - MONGO_PASS=pass
-            - MONGO_HOST=mongodb
+            - SERVICE_PORT=50051
         ports:
             - "50001:50051"
 
     srv_mtga_fe:
         build:
-            context: .
-            dockerfile: ./srv_mtga_fe/Dockerfile
+            context: ./srv_mtga_fe
         environment:
-            - MTGA_BE_IP=srv_mtga_be
-            - MTGA_BE_PORT=50051
+            - GRPC_PRODUCER_HOST=srv_mtga_be
+            - GRPC_PRODUCER_PORT=50051
         depends_on:
             - srv_mtga_be
-volumes:
-    mongo:

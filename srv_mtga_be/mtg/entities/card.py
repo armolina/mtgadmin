@@ -1,9 +1,9 @@
-from mtg.entities.card_foreign import CardForeign
-
 class Card:
-#    id: str
+    #    id: str
     manacost: str
     name: str
+
+
 """
     manacost: str
     colors = [str]
