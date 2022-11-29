@@ -11,7 +11,7 @@ from mtg.config import (
 
 class MongodbRepository(CardsRepository):
     def __init__(self) -> None:
-        self.client = MongoClient(
+        self.client: MongoClient = MongoClient(
             host=f"{MONGO_HOST}:{MONGO_PORT}",
             serverSelectionTimeoutMS=MONGO_TIMEOUT,
             username=MONGO_USERNAME,
