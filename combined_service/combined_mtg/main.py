@@ -28,7 +28,7 @@ def main_grpc():
 
 
 def main_rest():
-    uvicorn.run(app, port=8000, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
 
 
 def main():
