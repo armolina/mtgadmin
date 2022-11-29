@@ -1,23 +1,21 @@
 [tool.poetry]
-name = "mtg_backend_fast_api"
+name = "mtg"
 version = "0.1.0"
 description = ""
 authors = ["Ramón Molina", "Javier Martínez"]
 
 [tool.poetry.dependencies]
-python = "3.11.0"
-grpcio = "^1.43.0"
+python = ">3.10.0"
 pymongo = "^4.3.3"
 fastapi = "^0.88.0"
 uvicorn = "0.20.0"
-grpcio-tools = "^1.43.0"
-pytest-cov = "^4.0.0"
 load-dotenv = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"
 isort = "^5.10.1"
 pytest = "^7.2.0"
+tomli = "^2.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
