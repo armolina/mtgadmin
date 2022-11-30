@@ -48,10 +48,10 @@ def api_get_n_cards(number_of_items):
     return result
 
 if __name__ == '__main__':
-    number_of_items = 70000
+    number_of_items = 1
 
     api_result = api_get_n_cards(number_of_items)
-    #grpc_unary_result = grpc_get_n_unary_cards(number_of_items)
+    grpc_unary_result = grpc_get_n_unary_cards(number_of_items)
     grpc_stream_result = grpc_get_n_stream_cards(number_of_items)
 
     print('validating responses...')
@@ -60,5 +60,5 @@ if __name__ == '__main__':
         n_stream_items += 1
     
     print(f'{len(api_result)}: api received objects')
-    #print(f'{grpc_unary_result}: rpc stream received objects')
+    print(f'{grpc_unary_result}: rpc stream received objects')
     print(f'{n_stream_items}: rpc stream received objects')
