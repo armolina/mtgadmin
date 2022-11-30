@@ -1,7 +1,9 @@
 import time
+import os
 from functools import wraps
-from application.grpc.grpc_cards import GrpcCards
-from application.api.api_cards import ApiCards
+from mtg.application.grpc.grpc_cards import GrpcCards
+from mtg.application.api.api_cards import ApiCards
+
 
 def get_execution_time(func):
     @wraps(func)
@@ -11,13 +13,18 @@ def get_execution_time(func):
         end_time = time.time()
         print(f'{func.__name__} Took {end_time-start_time:.4f} seconds')
         return result
+
     return get_execution_time_wrapper
 
 
 @get_execution_time
 def grpc_get_n_cards(number_of_items):
-    grpc_cards = GrpcCards('127.0.0.1', '50051')
+    grpc_server = os.environ['GRPC_SERVER']
+    grpc_port = os.environ['GRPC_PORT']
+
+    grpc_cards = GrpcCards(grpc_server, grpc_port)
     result = grpc_cards.get_n_cards(number_of_items)
+
     return result
 
 @get_execution_time
@@ -36,4 +43,5 @@ if __name__ == '__main__':
     n_items = 0
     for card in grpc_result:
         n_items += 1
+    
     print(n_items)
