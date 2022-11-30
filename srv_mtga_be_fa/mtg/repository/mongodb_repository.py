@@ -1,14 +1,20 @@
 import sys
 import json
+import os
 from pymongo import MongoClient
 
 class MongodbRepository():
     def __open_connection(self) -> None:
+        mongo_user = os.environ['MONGO_USER']
+        mongo_pass = os.environ['MONGO_PASS']
+        mongo_host = os.environ['MONGO_HOST']
+        mongo_port = os.environ['MONGO_PORT']
+
         client = MongoClient(
-            host = '127.0.0.1:27017',
+            host = f'{mongo_host}:{mongo_port}',
             serverSelectionTimeoutMS = 3000,
-            username='root',
-            password='pass',
+            username=mongo_user,
+            password=mongo_pass,
         )
         return client['cards']
 

@@ -7,13 +7,22 @@ services:
         environment:
             - MONGO_USER=root
             - MONGO_PASS=pass
-            - MONGO_HOST=mongodb
+            - MONGO_HOST=mongo
+            - MONGO_PORT=27017
+            - GRPC_PORT=50051
         ports:
-            - "50001:50051"
+            - "50051:50051"
+        depends_on:
+            - mongo
     srv_mtga_be_fa:
         build:
             context: .
             dockerfile: ./srv_mtga_be_fa/Dockerfile
+        environment:
+            - MONGO_USER=root
+            - MONGO_PASS=pass
+            - MONGO_HOST=mongo
+            - MONGO_PORT=27017
         ports:
             - "8000:8000"
     srv_mtga_fe:
@@ -21,8 +30,10 @@ services:
             context: .
             dockerfile: ./srv_mtga_fe/Dockerfile
         environment:
-            - MTGA_BE_IP=srv_mtga_be
-            - MTGA_BE_PORT=50051
+            - GRPC_SERVER=srv_mtga_be
+            - GRPC_PORT=50051
+            - API_SERVER=http://srv_mtga_be_fa
+            - API_PORT=8000
         depends_on:
             - srv_mtga_be
     mongo:

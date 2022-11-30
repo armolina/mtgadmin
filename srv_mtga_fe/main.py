@@ -18,7 +18,21 @@ def get_execution_time(func):
 
 
 @get_execution_time
-def grpc_get_n_cards(number_of_items):
+def grpc_get_n_unary_cards(number_of_items):
+    grpc_server = os.environ['GRPC_SERVER']
+    grpc_port = os.environ['GRPC_PORT']
+
+    grpc_cards = GrpcCards(grpc_server, grpc_port)
+    
+    iterator = 0
+    while iterator <= number_of_items:
+        result = grpc_cards.get_one_card_from_position(iterator)
+        iterator+=1
+
+    return iterator-1
+
+@get_execution_time
+def grpc_get_n_stream_cards(number_of_items):
     grpc_server = os.environ['GRPC_SERVER']
     grpc_port = os.environ['GRPC_PORT']
 
@@ -34,14 +48,17 @@ def api_get_n_cards(number_of_items):
     return result
 
 if __name__ == '__main__':
-    number_of_items = 100
-    api_result = api_get_n_cards(number_of_items)
-    grpc_result = grpc_get_n_cards(number_of_items)
+    number_of_items = 70000
 
-    print(len(api_result))
+    api_result = api_get_n_cards(number_of_items)
+    #grpc_unary_result = grpc_get_n_unary_cards(number_of_items)
+    grpc_stream_result = grpc_get_n_stream_cards(number_of_items)
+
+    print('validating responses...')
+    n_stream_items = 0
+    for card in grpc_stream_result:
+        n_stream_items += 1
     
-    n_items = 0
-    for card in grpc_result:
-        n_items += 1
-    
-    print(n_items)
+    print(f'{len(api_result)}: api received objects')
+    #print(f'{grpc_unary_result}: rpc stream received objects')
+    print(f'{n_stream_items}: rpc stream received objects')
