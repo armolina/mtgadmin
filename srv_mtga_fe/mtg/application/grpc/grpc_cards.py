@@ -12,8 +12,8 @@ class GrpcCards():
         self.stub = mtg_card_pb2_grpc.CardServiceStub(self.channel)
                 
     
-    def get_one_card_from_position(self, position):     
-        request = mtg_card_pb2.MongoConstraints(skip=position)
+    def get_one_card_from_position(self, iterator, max_items):     
+        request = mtg_card_pb2.MongoConstraints(skip=iterator, max_items=max_items)
         result = self.stub.GetNumberMTGCard(request)
         return result
 

@@ -25,11 +25,11 @@ def grpc_get_n_unary_cards(number_of_items):
     grpc_cards = GrpcCards(grpc_server, grpc_port)
     
     iterator = 0
-    while iterator <= number_of_items:
-        result = grpc_cards.get_one_card_from_position(iterator)
+    while iterator < number_of_items:
+        result = grpc_cards.get_one_card_from_position(iterator, number_of_items)
         iterator+=1
 
-    return iterator-1
+    return iterator
 
 @get_execution_time
 def grpc_get_n_stream_cards(number_of_items):
@@ -48,7 +48,7 @@ def api_get_n_cards(number_of_items):
     return result
 
 if __name__ == '__main__':
-    number_of_items = 1
+    number_of_items = 100
 
     api_result = api_get_n_cards(number_of_items)
     grpc_unary_result = grpc_get_n_unary_cards(number_of_items)
